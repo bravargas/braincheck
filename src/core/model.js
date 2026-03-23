@@ -44,24 +44,49 @@
  * @property {string} payor
  * @property {string} payee
  * @property {string} bankName
+ * @property {string} bankRtn
+ * @property {string} bankShortName
+ * @property {string} bankLongName
+ * @property {string} bankState
+ * @property {string} bankCity
+ * @property {string} bankV1
+ * @property {string} bankV2
+ * @property {string} bankV3
  * @property {string} memo
  * @property {number} amount
  * @property {string} amountWords
  * @property {string} date
  * @property {string} checkNumber
- * @property {string} fictionalIdentifier
- * @property {string} micrDemoLine
+ * @property {string} accountNumber
+ * @property {string} checkIdentifier
+ * @property {string} micrLine
  * @property {string} signature
  * @property {ScenarioConfig} scenario
  */
 
+function getDateRange90Days() {
+  const today = new Date();
+  const start = new Date(today);
+  start.setDate(start.getDate() - 90);
+  const y = String(start.getFullYear()).padStart(4, "0");
+  const m = String(start.getMonth() + 1).padStart(2, "0");
+  const d = String(start.getDate()).padStart(2, "0");
+  const startStr = `${y}-${m}-${d}`;
+
+  const y2 = String(today.getFullYear()).padStart(4, "0");
+  const m2 = String(today.getMonth() + 1).padStart(2, "0");
+  const d2 = String(today.getDate()).padStart(2, "0");
+  const endStr = `${y2}-${m2}-${d2}`;
+
+  return { start: startStr, end: endStr };
+}
+
 export function createDefaultScenarioConfig() {
   return {
-    mode: "random",
-    seed: "demo-seed-001",
+    seed: `seed-${Math.random().toString(36).substr(2, 9)}`,
     presetId: "default-balanced",
     amountRange: { min: 25, max: 1500 },
-    dateRange: { start: "2025-01-01", end: "2026-12-31" },
+    dateRange: { start: getDateRange90Days().start, end: getDateRange90Days().end },
     effects: {
       blur: 0.4,
       brightness: 1,

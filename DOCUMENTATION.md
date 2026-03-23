@@ -2,7 +2,7 @@
 
 ## 1. Project Overview
 
-Synthetic Check Image Generator is a local-first, client-side web application designed to generate fictional check-like images for:
+Synthetic Check Image Generator is a local-first, client-side web application designed to generate check-like images for:
 
 - UI/UX testing
 - OCR stress testing
@@ -14,9 +14,9 @@ The application intentionally avoids any real banking-valid artifacts and applie
 
 This project is constrained by strict safety rules:
 
-- Uses fictional names, fictional institutions, and fictional identifiers only
-- Does not generate real routing numbers or real account numbers
-- Uses a clearly synthetic MICR-like line with explicit NOT-REAL labeling
+- Uses synthetic names, synthetic institutions, and synthetic identifiers only
+- Does not generate real account numbers
+- Uses a synthetic MICR line
 - Applies strong visible watermarking on generated checks (SAMPLE on front, VOID on rear)
 - Output is explicitly non-negotiable and unsuitable for real-world financial use
 
@@ -36,7 +36,7 @@ Phase 1 delivered a working MVP with the following capabilities:
 - Rear preview rendered on canvas
 - Manual mode and random mode
 - Seed-based deterministic generation
-- Fictional data loaded from local JSON files
+- Synthetic data loaded from local JSON files
 - Strong watermarking on every generated check
 - PNG export
 - JSON metadata export
@@ -50,7 +50,7 @@ Phase 1 delivered a working MVP with the following capabilities:
   - amount
   - date
   - signature
-  - MICR-like demo line
+  - MICR line
 - Scenario-based configuration model
 - Modular architecture separating generation, rendering, state, and UI wiring
 
@@ -125,7 +125,7 @@ Responsibilities:
 - support for manual overrides when mode is manual
 - amount/date generation within configured range
 - synthetic identifier generation
-- safe fictional MICR-like string generation
+- synthetic MICR string generation
 - scenario snapshot embedding for traceability
 
 ## 6.2 Rendering Layer
@@ -140,7 +140,7 @@ Draws front check composition:
 - SAMPLE watermark
 - bank title, check number, date, payee, amount, words, memo, signature
 - conditional field display based on visibility toggles
-- optional MICR-like line rendering
+- optional MICR line rendering
 
 #### src/render/rearRenderer.js
 Draws rear check composition:
@@ -210,10 +210,10 @@ Client-side file downloads for PNG and text-based metadata.
 ## 7. Data Files and Their Role
 
 ### src/data/banks.json
-Fictional institutions used for bank labels.
+Synthetic institutions used for bank labels.
 
 ### src/data/names.json
-Fictional payors, payees, and memo values.
+Synthetic payors, payees, and memo values.
 
 ### src/data/templates.json
 Template visual metadata (name, dimensions, colors).
@@ -278,3 +278,43 @@ python -m http.server 8080
 - Template coordinate system for multiple real-looking layouts
 - Noise pipeline (grain, compression artifacts, scan lines)
 - Light testing strategy (unit + render regression baselines)
+
+## 13. Dark Mode and UI Enhancements
+
+### 13.1 Dark Theme Implementation
+
+- Dark theme is set as the default presentation mode
+- User can toggle between light and dark mode using the theme button (🌙/☀️) in the control panel header
+- Theme preference is persisted in localStorage for consistency across sessions
+- CSS custom properties enable rapid theme switching without code changes
+
+### 13.2 OCR Photography Optimization
+
+The application has been optimized for camera-based OCR workflows:
+
+- **Increased external spacing**: Wider margins between control panels, tabs, and canvas elements prevent UI elements from interfering with check photography
+- **Consistent vertical alignment**: 80px top margins on all preview content for reliable framing
+- **Watermark opacity reduction**:
+  - Front SAMPLE watermark: 0.08 opacity (subtle visual indicator without OCR interference)
+  - Rear VOID watermark: 0.06 opacity (minimal visual footprint)
+- **Enhanced visibility contrast**:
+  - SAMPLE VOID text: Solid dark color at 16px for clear document identifier
+  - Check borders: Consistent 2px strokes for reliable edge detection in OCR
+
+### 13.3 Input Field Improvements
+
+Dark mode input backgrounds use #4d4d4d for better text contrast and legibility compared to system defaults.
+
+### 13.4 Date Format
+
+Check dates are rendered in mm/dd/yyyy format to match standard US banking conventions and improve OCR parsing accuracy.
+
+### 13.5 Project Metadata
+
+About tab now includes developer information and project timeline:
+
+- Costa Rica PS Team
+- Developer: Brainer Vargas
+- Contact: brainer.vargasrojas@fiserv.com
+- Created: 2016
+- Last modification: 2026-03-23

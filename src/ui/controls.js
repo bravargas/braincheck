@@ -6,14 +6,10 @@ function asNumber(value, fallback = 0) {
   return Number.isFinite(num) ? num : fallback;
 }
 
-export function wireControls(onGenerate, onRandomize) {
-  const mode = document.getElementById("mode");
-  const seed = document.getElementById("seed");
+export function wireControls(onGenerate) {
   const preset = document.getElementById("preset");
   const amountMin = document.getElementById("amountMin");
   const amountMax = document.getElementById("amountMax");
-  const dateStart = document.getElementById("dateStart");
-  const dateEnd = document.getElementById("dateEnd");
   const blur = document.getElementById("blur");
   const brightness = document.getElementById("brightness");
   const rotation = document.getElementById("rotation");
@@ -23,6 +19,7 @@ export function wireControls(onGenerate, onRandomize) {
   const manualBank = document.getElementById("manualBank");
   const manualAmount = document.getElementById("manualAmount");
   const manualDate = document.getElementById("manualDate");
+  const clearManualBtn = document.getElementById("clearManualBtn");
 
   const showPayee = document.getElementById("showPayee");
   const showAmount = document.getElementById("showAmount");
@@ -31,16 +28,11 @@ export function wireControls(onGenerate, onRandomize) {
   const showMicr = document.getElementById("showMicr");
 
   const generateBtn = document.getElementById("generateBtn");
-  const randomizeBtn = document.getElementById("randomizeBtn");
 
   const fields = [
-    mode,
-    seed,
     preset,
     amountMin,
     amountMax,
-    dateStart,
-    dateEnd,
     blur,
     brightness,
     rotation,
@@ -71,20 +63,21 @@ export function wireControls(onGenerate, onRandomize) {
   });
 
   generateBtn.addEventListener("click", onGenerate);
-  randomizeBtn.addEventListener("click", onRandomize);
+  clearManualBtn.addEventListener("click", () => {
+    manualPayor.value = "";
+    manualPayee.value = "";
+    manualBank.value = "";
+    manualAmount.value = "";
+    manualDate.value = "";
+    updateConfigFromDom();
+  });
 
   function updateConfigFromDom() {
     updateConfig({
-      mode: mode.value,
-      seed: seed.value,
       presetId: preset.value,
       amountRange: {
         min: asNumber(amountMin.value, 1),
         max: asNumber(amountMax.value, 1000)
-      },
-      dateRange: {
-        start: dateStart.value,
-        end: dateEnd.value
       },
       effects: {
         blur: asNumber(blur.value, 0),
@@ -110,13 +103,9 @@ export function wireControls(onGenerate, onRandomize) {
 
   function syncDomToConfig() {
     const cfg = getState().config;
-    mode.value = cfg.mode;
-    seed.value = cfg.seed;
     preset.value = cfg.presetId;
     amountMin.value = String(cfg.amountRange.min);
     amountMax.value = String(cfg.amountRange.max);
-    dateStart.value = cfg.dateRange.start;
-    dateEnd.value = cfg.dateRange.end;
     blur.value = String(cfg.effects.blur);
     brightness.value = String(cfg.effects.brightness);
     rotation.value = String(cfg.effects.rotation);

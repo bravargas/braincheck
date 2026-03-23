@@ -9,15 +9,34 @@ function clampAmountRange(min, max) {
   return min <= max ? { min, max } : { min: max, max: min };
 }
 
-function generateFictionalMicrLine(random) {
-  const prefix = `X${random.int(10, 99)}`;
-  const middle = `SIM${random.int(1000, 9999)}`;
-  const suffix = `DEMO${random.int(10000, 99999)}`;
-  return `${prefix} | ${middle} | ${suffix} | NOT-REAL`;
+function generateAccountNumber(random) {
+  return String(random.int(10000000000, 99999999999));
 }
 
-function generateFictionalIdentifier(random) {
-  return `FICTION-${random.int(100000, 999999)}-${random.int(100, 999)}`;
+function buildSyntheticTransitFromRtn(sourceRtn) {
+  const digits = String(sourceRtn || "").replace(/\D/g, "").padStart(9, "0").slice(0, 9);
+
+  // Keep linkage to source data while making this value intentionally non-usable.
+  return `${digits.slice(1, 8)}`;
+}
+
+function generateMicrLine(bank, accountNumber, checkSequence) {
+  // Placeholder letters are interpreted by many MICR fonts as symbols.
+  const TRANSIT = "A";
+  const ON_US = "C";
+  const DASH = "D";
+  const SPACE = " ";
+
+  const RTN = buildSyntheticTransitFromRtn(bank?.rtn);
+  return (
+    `${TRANSIT}${RTN}${TRANSIT}${SPACE}` +
+    `${accountNumber}${ON_US}${SPACE}` +
+    `${checkSequence}`
+  );
+}
+
+function generateCheckIdentifier(random) {
+  return `${random.int(10000, 99999)}`;
 }
 
 function chooseTemplate(templates, random) {
@@ -49,34 +68,42 @@ export function generateCheckSample(config, data) {
   const randomDate = randomDateInRange(config.dateRange.start, config.dateRange.end, random);
 
   const manual = config.manual;
-  const payor = config.mode === "manual" && manual.payor ? manual.payor : randomPayor;
-  const payee = config.mode === "manual" && manual.payee ? manual.payee : randomPayee;
-  const bankName = config.mode === "manual" && manual.bank ? manual.bank : randomBank.name;
-  const amount =
-    config.mode === "manual" && Number.isFinite(Number(manual.amount)) && Number(manual.amount) > 0
-      ? Number(manual.amount)
-      : randomAmount;
-  const date = config.mode === "manual" && manual.date ? manual.date : randomDate;
+  const payor = manual.payor ? manual.payor : randomPayor;
+  const payee = manual.payee ? manual.payee : randomPayee;
+  const bankName = manual.bank ? manual.bank : randomBank.shortName || randomBank.longName || randomBank.name || "SYNTH BANK";
+  const amount = Number.isFinite(Number(manual.amount)) && Number(manual.amount) > 0 ? Number(manual.amount) : randomAmount;
+  const date = manual.date ? manual.date : randomDate;
 
   const amountWords = amountToWords(amount);
-  const checkNumber = `CHK-${random.int(1000, 9999)}`;
+  const checkSequence = String(random.int(10000, 99999));
+  const checkNumber = `${checkSequence}`;
+  const accountNumber = generateAccountNumber(random);
   const memo = random.pick(data.names.memos);
 
   return {
-    id: `sample-${Date.now()}-${random.int(100, 999)}`,
+    id: `${Date.now()}-${random.int(100, 999)}`,
     templateId: template.id,
     watermark: "SAMPLE",
     payor,
     payee,
     bankName,
+    bankRtn: randomBank.rtn || "081505731",
+    bankShortName: randomBank.shortName || bankName,
+    bankLongName: randomBank.longName || bankName,
+    bankState: randomBank.state || "MO",
+    bankCity: randomBank.city || "OZARK",
+    bankV1: randomBank.v1 || "Y",
+    bankV2: randomBank.v2 || "",
+    bankV3: randomBank.v3 || "Y20040220",
     memo,
     amount,
     amountWords,
     date: toIsoDate(new Date(date)),
     checkNumber,
-    fictionalIdentifier: generateFictionalIdentifier(random),
-    micrDemoLine: generateFictionalMicrLine(random),
-    signature: "Synthetic Signature",
+    accountNumber: accountNumber,
+    checkIdentifier: generateCheckIdentifier(random),
+    micrLine: generateMicrLine(randomBank, accountNumber, checkSequence),
+    signature: payor,
     scenario: {
       ...config,
       amountRange: { ...config.amountRange },

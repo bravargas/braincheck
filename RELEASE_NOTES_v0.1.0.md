@@ -9,11 +9,11 @@ Initial public MVP of Synthetic Check Image Generator.
 - Front and rear canvas rendering
 - Manual and random generation modes
 - Seed-based deterministic generation
-- Fictional-only local datasets (banks, names, templates, presets)
+- Synthetic-only local datasets (banks, names, templates, presets)
 - Strong safety watermarking:
   - SAMPLE on front
   - VOID on rear
-- Fictional MICR-like line explicitly marked NOT-REAL
+- Synthetic MICR-like line explicitly marked NOT-REAL
 - PNG export
 - JSON metadata export
 - Base64 output panel
@@ -53,8 +53,8 @@ Initial public MVP of Synthetic Check Image Generator.
 
 ### Data
 
-- Fictional banks dataset
-- Fictional names dataset
+- Synthetic banks dataset
+- Synthetic names dataset
 - Template definitions dataset
 - Presets dataset
 

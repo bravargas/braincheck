@@ -14,8 +14,8 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
 
 ### Added - Safety Constraints Implementation
 
-- Enforced fictional-only data usage through local JSON datasets.
-- Added explicit synthetic MICR-like demo line marked with NOT-REAL.
+- Enforced synthetic data usage through local JSON datasets.
+- Added explicit synthetic MICR-like line marked with NOT-REAL.
 - Added strong visible watermarking strategy:
   - SAMPLE on front canvas
   - VOID on rear canvas
@@ -56,8 +56,8 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
 
 ### Added - Data Packs
 
-- Added src/data/banks.json with fictional bank labels.
-- Added src/data/names.json with fictional payors, payees, and memos.
+- Added src/data/banks.json with synthetic bank labels.
+- Added src/data/names.json with synthetic payors, payees, and memos.
 - Added src/data/templates.json with multiple visual templates.
 - Added src/data/presets.json with effect and visibility presets.
 
@@ -105,6 +105,26 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
   - Phase 1 feature list
   - extension ideas
 - Added DOCUMENTATION.md with comprehensive technical details.
+
+### Enhanced - UI/UX and Dark Mode Support (2026-03-23)
+
+- Implemented dark theme as default with automatic system preference detection.
+- Added theme toggle button (🌙/☀️) in control panel header.
+- Improved input field visibility in dark mode with lighter backgrounds (#4d4d4d).
+- Enhanced layout spacing for OCR photography:
+  - Increased external margins around canvas elements.
+  - Improved separation between control panels and preview areas.
+  - Better visual hierarchy with consistent 80px top margins for content.
+- Improved date formatting: Changed to mm/dd/yyyy format on checks.
+- Enhanced visibility of "SAMPLE VOID" text with solid color and larger font (16px).
+- Reduced watermark opacity for less visual impact on OCR:
+  - Front "SAMPLE" watermark reduced to 0.08 opacity.
+  - Rear "VOID" watermark reduced to 0.06 opacity.
+- Added proper spacing between manual field inputs and Clear button.
+- Updated project metadata in About section:
+  - Added developer information.
+  - Added contact email.
+  - Updated last modification date.
 
 ### Notes
 

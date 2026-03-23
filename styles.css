@@ -8,6 +8,39 @@
   --accent-soft: #d8efe6;
   --line: #d8d2c9;
   --warn: #a23b2a;
+  --micr-font-family: "Micr", "Consolas", "Courier New", monospace;
+  --signature-font-family: "Signerica Medium", "Brush Script MT", cursive;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --paper: #262626;
+  --panel: #2e2e2e;
+  --ink: #e8e8e8;
+  --muted: #a0a0a0;
+  --accent: #4caf50;
+  --accent-soft: #1b5e20;
+  --line: #3f3f3f;
+  --warn: #ef5350;
+}
+
+/* Optional MICR-like font for synthetic testing. Place a local font file at
+   src/assets/fonts/micr.woff2 to enable it. */
+@font-face {
+  font-family: "Micr";
+  src:
+    url("/src/assets/fonts/micrenc.ttf") format("truetype"),
+    url("/src/assets/fonts/micr.woff2") format("woff2"),
+    url("/src/assets/fonts/micr.woff") format("woff"),
+    url("/src/assets/fonts/micr.ttf") format("truetype");
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Signerica Medium";
+  src: url("/src/assets/fonts/Signerica_Medium.ttf") format("truetype");
+  font-display: fallback;
 }
 
 * {
@@ -24,9 +57,13 @@ body {
   min-height: 100vh;
 }
 
+[data-theme="dark"] body {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+}
+
 .app-shell {
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: 280px 1fr;
   min-height: 100vh;
 }
 
@@ -35,6 +72,18 @@ body {
   background: linear-gradient(180deg, #fef8f0 0%, #f8eddf 100%);
   padding: 20px;
   overflow-y: auto;
+}
+
+[data-theme="dark"] .controls-panel {
+  background: linear-gradient(180deg, #252525 0%, #1f1f1f 100%);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .controls-panel h1 {
@@ -49,8 +98,8 @@ body {
 }
 
 .control-group {
-  margin-bottom: 14px;
-  padding: 12px;
+  margin-bottom: 12px;
+  padding: 10px;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -63,8 +112,8 @@ body {
 
 .control-group label {
   display: block;
-  margin: 6px 0 4px;
-  font-size: 0.85rem;
+  margin: 5px 0 3px;
+  font-size: 0.80rem;
   color: var(--muted);
 }
 
@@ -83,6 +132,13 @@ textarea {
   border-radius: 8px;
   background: var(--paper);
   padding: 8px 10px;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: #4d4d4d;
+  color: #e8e8e8;
 }
 
 textarea {
@@ -141,13 +197,44 @@ button.ghost {
   color: var(--accent);
 }
 
+#clearManualBtn {
+  margin-top: 12px;
+}
+
 .actions {
   display: grid;
   gap: 8px;
+  position: sticky;
+  top: 12px;
+  z-index: 5;
+  box-shadow: 0 8px 20px rgba(45, 39, 29, 0.08);
+}
+
+.theme-toggle {
+  width: auto;
+  padding: 6px 10px;
+  font-size: 1.4rem;
+  border-color: var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  font-weight: normal;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--line);
+  filter: none;
 }
 
 .preview-panel {
-  padding: 20px;
+  padding: 40px 50px;
   overflow: auto;
 }
 
@@ -155,8 +242,7 @@ button.ghost {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 14px;
-}
+  margin-bottom: 24px;  margin-top: 16px;}
 
 .tabs button {
   width: auto;
@@ -169,6 +255,18 @@ button.ghost {
   background: #1f3439;
   border-color: #1f3439;
   color: #f9f9f9;
+}
+
+[data-theme="dark"] .tabs button {
+  background: #3f3f3f;
+  border-color: #4a4a4a;
+  color: #e8e8e8;
+}
+
+[data-theme="dark"] .tabs button.active {
+  background: #4caf50;
+  border-color: #4caf50;
+  color: #ffffff;
 }
 
 .tab-body {
@@ -187,6 +285,24 @@ canvas {
   border-radius: 12px;
   background: #ffffff;
   box-shadow: 0 14px 30px rgba(58, 52, 41, 0.12);
+  display: block;
+  margin-bottom: 32px;
+  margin-top: 80px;
+}
+
+[data-theme="dark"] canvas {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+
+.tab-body textarea {
+  display: block;
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 32px;
+}
+
+.tab-body.about {
+  margin-top: 80px;
 }
 
 .about {
@@ -195,6 +311,10 @@ canvas {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 14px;
+}
+
+[data-theme="dark"] .about {
+  background: #2e2e2e;
 }
 
 @keyframes fade-in {

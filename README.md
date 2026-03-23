@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Synthetic Check Image Generator is a local-first browser app that creates fictional check-like images for:
+Synthetic Check Image Generator is a local-first browser app that creates check-like images for:
 
 - UI/UX testing
 - OCR testing
@@ -17,9 +17,9 @@ Synthetic Check Image Generator is a local-first browser app that creates fictio
 
 This project is intentionally designed to be unusable for real financial activity:
 
-- Uses fictional-only bank names and identifiers
+- Uses synthetic-only bank names and identifiers
 - Does not generate real routing/account numbers
-- Uses a clearly synthetic MICR-like demo line marked as NOT-REAL
+- Uses a clearly synthetic MICR-like line marked as NOT-REAL
 - Applies strong visible watermarks (SAMPLE/VOID) on every output
 
 ## How to Run Locally
@@ -33,12 +33,21 @@ python -m http.server 8080
 
 3. Open a browser to http://localhost:8080.
 
+## Optional MICR-like Font Setup
+
+For specialized synthetic OCR testing, you can add an optional MICR-like font:
+
+1. Place a local font file at `src/assets/fonts/micr.woff2`.
+2. Reload the app.
+
+If no font file is present, the app automatically uses a monospace fallback.
+
 ## Architecture Summary
 
 - src/core: Data model, preset merge, seeded random, generation logic
 - src/render: Canvas front/rear rendering, text helpers, visual effects
 - src/ui: App bootstrap, state management, controls wiring, live preview
-- src/data: Fictional local JSON datasets for names, banks, templates, presets
+- src/data: Synthetic local JSON datasets for names, banks, templates, presets
 - src/utils: Amount-to-words, date helpers, download/export helpers
 
 Key design choices:
@@ -53,7 +62,7 @@ Key design choices:
 - Front and rear canvas previews
 - Manual and random generation modes
 - Seed-based reproducible random generation
-- Fictional data sourced from local JSON files
+- Synthetic data sourced from local JSON files
 - Strong watermark on all generated checks
 - PNG export
 - JSON metadata export
