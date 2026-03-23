@@ -1,0 +1,54 @@
+[
+  {
+    "id": "default-balanced",
+    "name": "Balanced",
+    "effects": {
+      "blur": 0.4,
+      "brightness": 1,
+      "rotation": 0.3
+    },
+    "visibility": {
+      "showPayee": true,
+      "showAmount": true,
+      "showDate": true,
+      "showSignature": true,
+      "showMicr": true
+    },
+    "amountRange": {
+      "min": 25,
+      "max": 1500
+    }
+  },
+  {
+    "id": "ocr-noisy",
+    "name": "OCR Noisy",
+    "effects": {
+      "blur": 1.1,
+      "brightness": 0.9,
+      "rotation": -1.1
+    },
+    "visibility": {
+      "showPayee": true,
+      "showAmount": true,
+      "showDate": true,
+      "showSignature": false,
+      "showMicr": true
+    }
+  },
+  {
+    "id": "minimal-fields",
+    "name": "Minimal Fields",
+    "effects": {
+      "blur": 0.2,
+      "brightness": 1.1,
+      "rotation": 0.1
+    },
+    "visibility": {
+      "showPayee": false,
+      "showAmount": false,
+      "showDate": true,
+      "showSignature": false,
+      "showMicr": false
+    }
+  }
+]

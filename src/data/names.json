@@ -1,0 +1,23 @@
+{
+  "payors": [
+    "Acme Labs LLC",
+    "Nimbus Fabrication Co",
+    "Cinder Grove Studio",
+    "Maple Orbital Systems",
+    "Suntrack Design Group"
+  ],
+  "payees": [
+    "Jordan Example",
+    "Taylor Sample",
+    "Morgan Placeholder",
+    "Riley Fiction",
+    "Avery Synthetic"
+  ],
+  "memos": [
+    "Synthetic QA test",
+    "OCR validation batch",
+    "UI fixture record",
+    "Dataset seed run",
+    "Template smoke test"
+  ]
+}

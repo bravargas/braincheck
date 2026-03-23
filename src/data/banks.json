@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Fictional Trust of Orion",
+    "demoCode": "SIM-ORION-01",
+    "city": "Arcadia"
+  },
+  {
+    "name": "Northwind Synthetic Credit Union",
+    "demoCode": "SIM-NORTH-77",
+    "city": "Harbor Point"
+  },
+  {
+    "name": "Atlas Mock Finance",
+    "demoCode": "SIM-ATLAS-45",
+    "city": "Sunvale"
+  },
+  {
+    "name": "Praxis Demo Savings",
+    "demoCode": "SIM-PRAX-29",
+    "city": "Lumen City"
+  }
+]
