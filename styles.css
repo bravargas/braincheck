@@ -65,6 +65,26 @@ body {
   display: grid;
   grid-template-columns: 280px 1fr;
   min-height: 100vh;
+  position: relative;
+}
+
+.app-shell.hover-focus-active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 4, 6, 0.86);
+  z-index: 55;
+  pointer-events: none;
+}
+
+.app-shell canvas.hover-focus-target {
+  position: relative;
+  z-index: 60;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.42);
+}
+
+[data-theme="dark"] .app-shell.hover-focus-active::after {
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .controls-panel {

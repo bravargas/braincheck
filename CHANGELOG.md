@@ -41,6 +41,8 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
 - Added a Visibility option to hide/show watermarks on both front and rear previews.
 - Unified watermark copy to a single text across all placements: "*** SAMPLE VOID***".
 - Replaced the near-payor front label text with synthetic payor addresses generated per sample.
+- Added hover focus mode: when hovering Front/Rear previews, the rest of the interface dims to highlight the active check.
+- Expanded hover-focus activation area with a margin around each check so focus can trigger without placing the cursor directly on the image.
 
 ## [0.1.0] - 2026-03-23
 

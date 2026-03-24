@@ -2,7 +2,7 @@ import { generateCheckSample } from "../core/generator.js";
 import { createSeededRandom } from "../core/seededRandom.js";
 import { downloadCanvasAsPng } from "../utils/download.js";
 import { wireControls } from "./controls.js";
-import { clearExtraViews, renderPreview, setupTabs, setupFlipToggle } from "./preview.js";
+import { clearExtraViews, renderPreview, setupTabs, setupFlipToggle, setupHoverFocus } from "./preview.js";
 import { getState, setState, subscribe, updateConfig } from "./state.js";
 
 // Internal deployment config for the legacy tool shortcut shown below the app title.
@@ -170,6 +170,7 @@ async function init() {
   wireLegacyVersionLink();
   setupTabs();
   setupFlipToggle();
+  setupHoverFocus();
 
   subscribe((state) => {
     renderPreview(state);

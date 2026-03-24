@@ -1,5 +1,50 @@
 import { renderSample } from "../render/renderer.js";
 
+export function setupHoverFocus() {
+  const appShell = document.querySelector(".app-shell");
+  const previewPanel = document.querySelector(".preview-panel");
+  const canvases = Array.from(document.querySelectorAll("#frontCanvas, #rearCanvas, #frontCanvasBoth, #rearCanvasBoth"));
+  const focusMarginPx = 120;
+
+  if (!appShell || !previewPanel || !canvases.length) {
+    return;
+  }
+
+  const clearFocus = () => {
+    appShell.classList.remove("hover-focus-active");
+    canvases.forEach((canvas) => canvas.classList.remove("hover-focus-target"));
+  };
+
+  const findCanvasWithinMargin = (clientX, clientY) => {
+    return canvases.find((canvas) => {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) {
+        return false;
+      }
+
+      return (
+        clientX >= rect.left - focusMarginPx &&
+        clientX <= rect.right + focusMarginPx &&
+        clientY >= rect.top - focusMarginPx &&
+        clientY <= rect.bottom + focusMarginPx
+      );
+    });
+  };
+
+  previewPanel.addEventListener("mousemove", (event) => {
+    const targetCanvas = findCanvasWithinMargin(event.clientX, event.clientY);
+    if (!targetCanvas) {
+      clearFocus();
+      return;
+    }
+
+    appShell.classList.add("hover-focus-active");
+    canvases.forEach((canvas) => canvas.classList.toggle("hover-focus-target", canvas === targetCanvas));
+  });
+
+  previewPanel.addEventListener("mouseleave", clearFocus);
+}
+
 function getSecondaryPanes(allTabButtons) {
   const allowedPanes = new Set(
     allTabButtons
