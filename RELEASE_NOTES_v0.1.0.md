@@ -1,6 +1,6 @@
 # Release v0.1.0 - Initial MVP
 
-Initial public MVP of Synthetic Check Image Generator.
+Initial public MVP of BrainCheque.
 
 ## Highlights
 

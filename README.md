@@ -1,8 +1,8 @@
-# Synthetic Check Image Generator
+# BrainCheque
 
 ## Purpose
 
-Synthetic Check Image Generator is a local-first browser app that creates check-like images for:
+BrainCheque is a local-first browser app that creates check-like images for:
 
 - UI/UX testing
 - OCR testing

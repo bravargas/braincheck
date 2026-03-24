@@ -1,8 +1,8 @@
-# Synthetic Check Image Generator - Full Technical Documentation
+# BrainCheque - Full Technical Documentation
 
 ## 1. Project Overview
 
-Synthetic Check Image Generator is a local-first, client-side web application designed to generate check-like images for:
+BrainCheque is a local-first, client-side web application designed to generate check-like images for:
 
 - UI/UX testing
 - OCR stress testing

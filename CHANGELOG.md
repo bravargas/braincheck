@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Synthetic Check Image Generator are documented in this file.
+All notable changes to BrainCheque are documented in this file.
 
 The format is inspired by Keep a Changelog and uses semantic versioning principles for future releases.
 
@@ -15,6 +15,10 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
   - .ttf -> font/ttf
   - .woff -> font/woff
   - .woff2 -> font/woff2
+
+### Changed - Product Branding
+
+- Renamed app branding from BrainCheck to BrainCheque in the web UI and project documentation.
 
 ## [0.1.0] - 2026-03-23
 
