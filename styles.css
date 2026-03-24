@@ -72,7 +72,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(3, 4, 6, 0.86);
+  background: rgba(1, 1, 2, 0.96);
   z-index: 55;
   pointer-events: none;
 }
@@ -84,7 +84,7 @@ body {
 }
 
 [data-theme="dark"] .app-shell.hover-focus-active::after {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.98);
 }
 
 .controls-panel {

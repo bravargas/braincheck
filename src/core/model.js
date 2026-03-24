@@ -88,7 +88,7 @@ export function createDefaultScenarioConfig() {
     country: "us",
     seed: `seed-${Math.random().toString(36).substr(2, 9)}`,
     presetId: "default-balanced",
-    amountRange: { min: 25, max: 1500 },
+    amountRange: { min: 1, max: 100 },
     dateRange: { start: getDateRange90Days().start, end: getDateRange90Days().end },
     effects: {
       blur: 0.4,

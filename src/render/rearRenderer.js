@@ -66,7 +66,7 @@ export function renderRear(ctx, sample) {
     "'Brush Script MT', cursive";
   ctx.fillStyle = "#0047AB";
   ctx.font = `24px ${signatureFontFamily}`;
-  ctx.fillText(sample.payee, 50, 82);
+  ctx.fillText(sample.payee, 50, 96);
 
   ctx.fillStyle = "#2a3945";
   ctx.font = "14px 'Trebuchet MS', sans-serif";

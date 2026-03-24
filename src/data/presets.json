@@ -15,8 +15,8 @@
       "showMicr": true
     },
     "amountRange": {
-      "min": 25,
-      "max": 1500
+      "min": 1,
+      "max": 100
     }
   },
   {

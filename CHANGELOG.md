@@ -43,6 +43,9 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
 - Replaced the near-payor front label text with synthetic payor addresses generated per sample.
 - Added hover focus mode: when hovering Front/Rear previews, the rest of the interface dims to highlight the active check.
 - Expanded hover-focus activation area with a margin around each check so focus can trigger without placing the cursor directly on the image.
+- Increased front check-number size and aligned its right edge with the right endpoints of Amount, Amount in Words, and Signature lines.
+- Standardized right-side line endpoints in the front layout to eliminate visual misalignment.
+- Updated default amount range to 1-100 (model defaults, UI defaults, and Balanced preset).
 
 ## [0.1.0] - 2026-03-23
 

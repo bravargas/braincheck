@@ -34,6 +34,7 @@ function drawWatermark(ctx, width, height, text) {
 export function renderFront(ctx, sample) {
   const { width, height } = ctx.canvas;
   const vis = sample.scenario.visibility;
+  const rightEdge = width - 48;
 
   drawBackground(ctx, sample, width, height);
   if (vis.showWatermark) {
@@ -47,9 +48,11 @@ export function renderFront(ctx, sample) {
   ctx.font = "14px 'Trebuchet MS', sans-serif";
   ctx.fillStyle = "#3f4c57";
   ctx.fillText(sample.payorAddress || "", 34, 78);
-  ctx.font = "500 24px 'Trebuchet MS', sans-serif";
+  ctx.font = "700 30px 'Trebuchet MS', sans-serif";
   ctx.fillStyle = "#2a3945";
-  ctx.fillText(sample.checkNumber, width - 160, 64);
+  ctx.textAlign = "right";
+  ctx.fillText(sample.checkNumber, rightEdge, 64);
+  ctx.textAlign = "left";
 
   if (vis.showDate) {
     const dateLineX = width - 390;
@@ -60,28 +63,42 @@ export function renderFront(ctx, sample) {
     ctx.font = "400 22px 'Trebuchet MS', sans-serif";
     ctx.textAlign = "center";
     ctx.fillText(formatDateMMDDYYYY(sample.date), dateLineX + dateLineWidth / 2, 116);
-    ctx.textAlign = "left";
 
     drawRule(ctx, dateLineX, dateLineY, dateLineWidth, "#1e2730");
     ctx.font = "400 16px 'Trebuchet MS', sans-serif";
-    ctx.fillText("Date", dateLineX + dateLineWidth - 36, 152);
+    ctx.textAlign = "center";
+    ctx.fillText("Date", dateLineX + dateLineWidth / 2, 146);
+    ctx.textAlign = "left";
   }
 
   drawLabelValue(ctx, "Pay to the Order of", vis.showPayee ? sample.payee : "", 36, 146, {
+    labelFont: "400 16px 'Trebuchet MS', sans-serif",
     valueFont: "700 20px 'Trebuchet MS', sans-serif"
   });
   drawRule(ctx, 36, 171, width - 290);
 
+  const amountLineX = width - 230;
+  const amountLineWidth = rightEdge - amountLineX;
+  const amountLabelX = width - 220;
+  const amountLabelY = 171;
+  const amountValueY = 198;
   const amountValue = vis.showAmount ? `$${sample.amount.toFixed(2)}` : "";
-  drawLabelValue(ctx, "Amount", amountValue, width - 220, 178, {
-    valueFont: "700 22px 'Trebuchet MS', sans-serif"
-  });
-  drawRule(ctx, width - 230, 202, 180);
+
+  ctx.fillStyle = "#3f4c57";
+  ctx.font = "400 16px 'Trebuchet MS', sans-serif";
+  ctx.fillText("Amount", amountLabelX, amountLabelY);
+
+  ctx.fillStyle = "#1e2730";
+  ctx.font = "700 22px 'Trebuchet MS', sans-serif";
+  ctx.fillText(amountValue, amountLabelX, amountValueY);
+
+  drawRule(ctx, amountLineX, 202, amountLineWidth);
 
   drawLabelValue(ctx, "Amount in Words", vis.showAmount ? sample.amountWords : "", 36, 224, {
+    labelFont: "400 16px 'Trebuchet MS', sans-serif",
     valueFont: "600 18px 'Trebuchet MS', sans-serif"
   });
-  drawRule(ctx, 36, 248, width - 72);
+  drawRule(ctx, 36, 248, rightEdge - 36);
 
   const bankLogoX = 36;
   const bankLogoY = 264;
@@ -98,7 +115,9 @@ export function renderFront(ctx, sample) {
   ctx.fillStyle = "#3f4c57";
   ctx.font = "14px 'Trebuchet MS', sans-serif";
   ctx.fillText(`${sample.bankCity}, ${sample.bankState}`, bankTextX, 308);
-  drawLabelValue(ctx, "For", sample.memo, 36, 332);
+  drawLabelValue(ctx, "For", sample.memo, 36, 332, {
+    labelFont: "400 16px 'Trebuchet MS', sans-serif"
+  });
 
   if (vis.showSignature) {
     const signatureFontFamily =
@@ -108,7 +127,7 @@ export function renderFront(ctx, sample) {
     const signatureLabelY = 285;
     const signatureValueY = 326;
     const signatureRuleY = 330;
-    const signatureRuleWidth = 240;
+    const signatureRuleWidth = rightEdge - signatureX;
     const signatureMaxWidth = signatureRuleWidth - 8;
 
     let signatureFontSize = 34;
@@ -122,7 +141,7 @@ export function renderFront(ctx, sample) {
     }
 
     ctx.fillStyle = "#3f4c57";
-    ctx.font = "12px 'Trebuchet MS', sans-serif";
+    ctx.font = "400 16px 'Trebuchet MS', sans-serif";
     ctx.fillText("Signature", signatureX, signatureLabelY);
 
     ctx.fillStyle = "#0047AB";
