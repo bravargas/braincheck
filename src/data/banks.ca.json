@@ -1,0 +1,68 @@
+[
+  {
+    "transit": "06710",
+    "institution": "003",
+    "shortName": "RBC TORONTO",
+    "longName": "ROYAL BANK OF CANADA",
+    "state": "ON M5J 2J5",
+    "city": "TORONTO",
+    "v1": "Y",
+    "v2": "",
+    "v3": "Y20260323"
+  },
+  {
+    "transit": "00011",
+    "institution": "002",
+    "shortName": "BMO MONTREAL",
+    "longName": "BANK OF MONTREAL",
+    "state": "QC H3B 4G1",
+    "city": "MONTREAL",
+    "v1": "Y",
+    "v2": "",
+    "v3": "Y20260323"
+  },
+  {
+    "transit": "01001",
+    "institution": "004",
+    "shortName": "TD VANCOUVER",
+    "longName": "TORONTO-DOMINION BANK",
+    "state": "BC V6C 3N6",
+    "city": "VANCOUVER",
+    "v1": "Y",
+    "v2": "",
+    "v3": "Y20260323"
+  },
+  {
+    "transit": "09015",
+    "institution": "010",
+    "shortName": "CIBC CALGARY",
+    "longName": "CANADIAN IMPERIAL BANK OF COMMERCE",
+    "state": "AB T2P 2M5",
+    "city": "CALGARY",
+    "v1": "Y",
+    "v2": "",
+    "v3": "Y20260323"
+  },
+  {
+    "transit": "02720",
+    "institution": "006",
+    "shortName": "NBC HALIFAX",
+    "longName": "NATIONAL BANK OF CANADA",
+    "state": "NS B3J 3K5",
+    "city": "HALIFAX",
+    "v1": "Y",
+    "v2": "",
+    "v3": "Y20260323"
+  },
+  {
+    "transit": "08600",
+    "institution": "030",
+    "shortName": "LAURENTIAN QC",
+    "longName": "LAURENTIAN BANK OF CANADA",
+    "state": "QC H2Y 1M7",
+    "city": "QUEBEC",
+    "v1": "Y",
+    "v2": "",
+    "v3": "Y20260323"
+  }
+]

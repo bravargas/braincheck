@@ -70,7 +70,8 @@ Phase 1 delivered a working MVP with the following capabilities:
     textLayout.js
     effects.js
   /data
-    banks.json
+    banks.us.json
+    banks.ca.json
     names.json
     templates.json
     presets.json
@@ -209,8 +210,26 @@ Client-side file downloads for PNG and text-based metadata.
 
 ## 7. Data Files and Their Role
 
-### src/data/banks.json
-Synthetic institutions used for bank labels.
+### src/data/banks.us.json
+Synthetic US institutions used for US check generation.
+
+### src/data/banks.ca.json
+Synthetic Canadian institutions used for Canadian check generation.
+
+Expected fields per entry:
+
+- transit (5 digits)
+- institution (3 digits)
+- shortName
+- longName
+- city
+- state (province + postal format, example: ON M5J 2J5)
+- v1, v2, v3 (optional metadata)
+
+Generator mapping notes:
+
+- Bank display name uses shortName, then longName as fallback.
+- Province line uses state, with province fallback for backward compatibility.
 
 ### src/data/names.json
 Synthetic payors, payees, and memo values.
@@ -238,7 +257,7 @@ Preset effect and visibility combinations for quick scenario switching.
 
 ### 8.3 Primary Flow
 
-1. User sets seed/mode/ranges/effects/visibility/preset.
+1. User sets seed/country/ranges/effects/visibility/preset.
 2. User clicks Generate or Randomize Seed + Generate.
 3. App computes GeneratedCheckSample.
 4. Renderer updates front/rear canvas.

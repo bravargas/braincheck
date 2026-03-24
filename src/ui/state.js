@@ -5,7 +5,8 @@ const state = {
   sample: null,
   activeTab: "front",
   datasets: {
-    banks: [],
+    banksUS: [],
+    banksCA: [],
     names: { payors: [], payees: [], memos: [] },
     templates: [],
     presets: []

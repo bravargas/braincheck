@@ -21,6 +21,12 @@
         </div>
 
         <section class="control-group">
+          <label for="checkCountry">Check Country</label>
+          <select id="checkCountry">
+            <option value="us">US</option>
+            <option value="ca">Canada</option>
+          </select>
+
           <label for="preset">Preset</label>
           <select id="preset"></select>
         </section>
@@ -54,7 +60,7 @@
           <label for="manualAmount">Amount</label>
           <input id="manualAmount" type="number" min="1" step="0.01" placeholder="245.50" />
           <label for="manualDate">Date</label>
-          <input id="manualDate" type="date" />
+          <input id="manualDate" type="text" inputmode="numeric" placeholder="mm/dd/yyyy" />
           <button id="clearManualBtn" type="button" class="ghost">Clear Manual Fields</button>
         </section>
 

@@ -98,15 +98,17 @@ async function init() {
   initTheme();
   setupTabs();
 
-  const [banks, names, templates, presets] = await Promise.all([
-    loadJson("./src/data/banks.json"),
+  const [banksUS, banksCA, names, templates, presets] = await Promise.all([
+    loadJson("./src/data/banks.us.json"),
+    loadJson("./src/data/banks.ca.json"),
     loadJson("./src/data/names.json"),
     loadJson("./src/data/templates.json"),
     loadJson("./src/data/presets.json")
   ]);
 
   applyDatasets({
-    banks,
+    banksUS,
+    banksCA,
     names,
     templates,
     presets

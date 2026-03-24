@@ -26,7 +26,7 @@
 
 /**
  * @typedef {Object} ScenarioConfig
- * @property {string} mode - random | manual
+ * @property {"us"|"ca"} country
  * @property {string} seed
  * @property {string} presetId
  * @property {{min:number, max:number}} amountRange
@@ -83,6 +83,7 @@ function getDateRange90Days() {
 
 export function createDefaultScenarioConfig() {
   return {
+    country: "us",
     seed: `seed-${Math.random().toString(36).substr(2, 9)}`,
     presetId: "default-balanced",
     amountRange: { min: 25, max: 1500 },

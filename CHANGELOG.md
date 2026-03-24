@@ -125,6 +125,14 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
   - Added developer information.
   - Added contact email.
   - Updated last modification date.
+- Split bank datasets by country:
+  - src/data/banks.us.json
+  - src/data/banks.ca.json
+  - removed runtime dependency on src/data/banks.json
+- Fixed Canadian bank field mapping regression:
+  - Prevented "undefined" bank labels on generated checks.
+  - Generator now maps CA bank names from shortName/longName.
+  - Generator now maps province/state from state (with province fallback).
 
 ### Notes
 
