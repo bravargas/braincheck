@@ -14,6 +14,9 @@
         <div class="panel-header">
           <div>
             <h1>BrainCheque v.2.0.0</h1>
+            <p class="header-links">
+              <a id="legacyVersionLink" class="legacy-version-inline" href="#" hidden target="_blank" rel="noopener noreferrer">Open Previous Version v1.0.3</a>
+            </p>
             <h2>Synthetic Check Image Generator</h2>
             <p class="subtitle">Checks for OCR testing and synthetic dataset generation.</p>
           </div>
@@ -46,6 +49,10 @@
 
         <section class="control-group actions">
           <button id="generateBtn" type="button">Generate</button>
+          <button id="flipViewBtn" type="button" class="flip-toggle" title="Flip between front and rear">
+            <span class="flip-icon" aria-hidden="true"></span>
+            <span>Flip View</span>
+          </button>
           <button id="exportPngBtn" type="button" class="ghost">Export PNG</button>
         </section>
 
@@ -89,17 +96,18 @@
             <label><input id="showMicr" type="checkbox" checked /> MICR-like line</label>
           </div>
         </section>
+
+        <section class="control-group utility-tabs">
+          <h2>Extra Views</h2>
+          <div class="utility-tab-buttons">
+            <button type="button" data-tab="json" class="tab-secondary">JSON</button>
+            <button type="button" data-tab="base64" class="tab-secondary">Base64</button>
+            <button type="button" data-tab="about" class="tab-secondary">About</button>
+          </div>
+        </section>
       </aside>
 
       <main class="preview-panel">
-        <nav class="tabs">
-          <button data-tab="front" class="active">Front</button>
-          <button data-tab="rear">Rear</button>
-          <button data-tab="json">JSON</button>
-          <button data-tab="base64">Base64</button>
-          <button data-tab="about">About</button>
-        </nav>
-
         <section class="tab-body active" data-pane="front">
           <canvas id="frontCanvas" width="960" height="420"></canvas>
         </section>

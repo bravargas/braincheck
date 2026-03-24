@@ -15,10 +15,20 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
   - .ttf -> font/ttf
   - .woff -> font/woff
   - .woff2 -> font/woff2
+- Added a post-load canvas refresh after custom fonts are ready to prevent fallback typography on initial render.
 
 ### Changed - Product Branding
 
 - Renamed app branding from BrainCheck to BrainCheque in the web UI and project documentation.
+
+### Added - Legacy Version Shortcut
+
+- Added a configurable link below the BrainCheque title to open the previous internal tool version (v1.0.3).
+- Link visibility, label, and URL are controlled from src/ui/app.js via legacyVersionConfig.
+
+### Changed - UI Polish
+
+- Redesigned Front/Rear view selector as a compact single flip-icon button in the actions section, improving visual balance.
 
 ## [0.1.0] - 2026-03-23
 

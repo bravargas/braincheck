@@ -1,15 +1,30 @@
 import { renderSample } from "../render/renderer.js";
 
 export function setupTabs() {
-  const tabButtons = Array.from(document.querySelectorAll(".tabs button"));
+  const allTabButtons = Array.from(document.querySelectorAll("button[data-tab]"));
   const panes = Array.from(document.querySelectorAll(".tab-body"));
 
-  tabButtons.forEach((button) => {
+  // Tab buttons in Extra Views (JSON/Base64/About)
+  allTabButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const tab = button.dataset.tab;
-      tabButtons.forEach((btn) => btn.classList.toggle("active", btn === button));
+      allTabButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.tab === tab));
       panes.forEach((pane) => pane.classList.toggle("active", pane.dataset.pane === tab));
     });
+  });
+}
+
+export function setupFlipToggle() {
+  const flipBtn = document.getElementById("flipViewBtn");
+  if (!flipBtn) return;
+
+  flipBtn.addEventListener("click", () => {
+    const currentPane = document.querySelector(".tab-body.active")?.dataset.pane || "front";
+    const newTab = currentPane === "front" ? "rear" : "front";
+    
+    // Update active pane
+    const panes = Array.from(document.querySelectorAll(".tab-body"));
+    panes.forEach((pane) => pane.classList.toggle("active", pane.dataset.pane === newTab));
   });
 }
 

@@ -2,8 +2,15 @@ import { generateCheckSample } from "../core/generator.js";
 import { createSeededRandom } from "../core/seededRandom.js";
 import { downloadCanvasAsPng } from "../utils/download.js";
 import { wireControls } from "./controls.js";
-import { renderPreview, setupTabs } from "./preview.js";
+import { renderPreview, setupTabs, setupFlipToggle } from "./preview.js";
 import { getState, setState, subscribe, updateConfig } from "./state.js";
+
+// Internal deployment config for the legacy tool shortcut shown below the app title.
+const legacyVersionConfig = {
+  enabled: true,
+  label: "Open Previous Version v1.0.3",
+  url: "../v.1.0.3/"
+};
 
 // Theme initialization
 function initTheme() {
@@ -70,13 +77,29 @@ function createSampleAndRender() {
   setState({ sample });
 }
 
+async function refreshAfterFontsLoad(timeoutMs = 2500) {
+  if (!document.fonts || !document.fonts.load) {
+    return;
+  }
+
+  const waitForFonts = Promise.allSettled([
+    document.fonts.load('16px "Signerica Medium"'),
+    document.fonts.load('16px "Micr"'),
+    document.fonts.ready
+  ]);
+  const timeout = new Promise((resolve) => setTimeout(resolve, timeoutMs));
+
+  await Promise.race([waitForFonts, timeout]);
+  createSampleAndRender();
+}
+
 function wireExportButtons() {
   const exportPngBtn = document.getElementById("exportPngBtn");
 
   exportPngBtn.addEventListener("click", () => {
-    const activeTab = document.querySelector(".tabs button.active")?.dataset.tab || "front";
-    const canvas =
-      activeTab === "rear" ? document.getElementById("rearCanvas") : document.getElementById("frontCanvas");
+    const activePane = document.querySelector(".tab-body.active")?.dataset.pane || "front";
+    const activeTab = activePane === "rear" ? "rear" : "front";
+    const canvas = activeTab === "rear" ? document.getElementById("rearCanvas") : document.getElementById("frontCanvas");
     downloadCanvasAsPng(canvas, `synthetic-check-${activeTab}.png`);
   });
 }
@@ -86,6 +109,22 @@ function wireThemeToggle() {
   if (themeToggle) {
     themeToggle.addEventListener("click", toggleTheme);
   }
+}
+
+function wireLegacyVersionLink() {
+  const link = document.getElementById("legacyVersionLink");
+  if (!link) {
+    return;
+  }
+
+  if (!legacyVersionConfig.enabled || !legacyVersionConfig.url) {
+    link.hidden = true;
+    return;
+  }
+
+  link.textContent = legacyVersionConfig.label;
+  link.href = legacyVersionConfig.url;
+  link.hidden = false;
 }
 
 function applyDatasets(datasets) {
@@ -128,12 +167,16 @@ async function init() {
 
   wireExportButtons();
   wireThemeToggle();
+  wireLegacyVersionLink();
+  setupTabs();
+  setupFlipToggle();
 
   subscribe((state) => {
     renderPreview(state);
   });
 
   createSampleAndRender();
+  refreshAfterFontsLoad();
 }
 
 init().catch((error) => {

@@ -196,7 +196,7 @@ Wires DOM controls to state updates and actions:
 #### src/ui/preview.js
 Handles:
 
-- tab switching behavior (Front, Rear, JSON, Base64, About)
+- tab switching behavior for primary controls near Generate (Front/Rear) and secondary settings controls (JSON/Base64/About)
 - canvas rendering refresh
 - JSON text output
 - base64 image output generation
@@ -208,6 +208,14 @@ Application bootstrap:
 - control initialization
 - generation and re-render flow
 - export button actions (PNG and JSON)
+- internal configuration for title-area legacy-version link (legacyVersionConfig)
+- post-font-load canvas refresh to ensure custom font rendering on first open
+
+Legacy link configuration:
+
+- Update legacyVersionConfig.url to your internal v1.0.3 route.
+- Set legacyVersionConfig.enabled to false to hide the link.
+- Update legacyVersionConfig.label for custom display text.
 
 ## 6.4 Utility Layer
 
