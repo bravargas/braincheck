@@ -28,7 +28,19 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
 
 ### Changed - UI Polish
 
-- Redesigned Front/Rear view selector as a compact single flip-icon button in the actions section, improving visual balance.
+- Replaced the cycling view button with an explicit segmented 3-state selector (Both, Front, Rear).
+- Set Both as the first option and default preview mode.
+- Updated Both layout to stacked previews (front above rear) and tuned spacing/scale to fit the panel.
+- Removed redundant Front/Rear labels from the dual preview.
+- Removed JSON and Base64 options from Extra Views to simplify the UI.
+- Kept About as the only secondary panel and preserved automatic panel reset on Generate.
+- Converted About into a floating modal with close actions (X, outside click, Escape) and smooth open/close animation.
+- Fixed About button behavior by removing duplicate tab initialization.
+- Fixed About modal open animation jump by disabling conflicting generic tab animation on the modal.
+- Updated rear watermark from VOID to SAMPLE, matching the front watermark color and orientation.
+- Added a Visibility option to hide/show watermarks on both front and rear previews.
+- Unified watermark copy to a single text across all placements: "*** SAMPLE VOID***".
+- Replaced the near-payor front label text with synthetic payor addresses generated per sample.
 
 ## [0.1.0] - 2026-03-23
 

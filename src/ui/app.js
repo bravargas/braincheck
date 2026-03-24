@@ -2,7 +2,7 @@ import { generateCheckSample } from "../core/generator.js";
 import { createSeededRandom } from "../core/seededRandom.js";
 import { downloadCanvasAsPng } from "../utils/download.js";
 import { wireControls } from "./controls.js";
-import { renderPreview, setupTabs, setupFlipToggle } from "./preview.js";
+import { clearExtraViews, renderPreview, setupTabs, setupFlipToggle } from "./preview.js";
 import { getState, setState, subscribe, updateConfig } from "./state.js";
 
 // Internal deployment config for the legacy tool shortcut shown below the app title.
@@ -135,7 +135,6 @@ function applyDatasets(datasets) {
 
 async function init() {
   initTheme();
-  setupTabs();
 
   const [banksUS, banksCA, names, templates, presets] = await Promise.all([
     loadJson("./src/data/banks.us.json"),
@@ -155,6 +154,7 @@ async function init() {
 
   const controls = wireControls(
     () => {
+      clearExtraViews();
       updateConfig({ seed: randomSeed(), dateRange: getDateRange90Days() });
       controls.syncDomToConfig();
       controls.updateConfigFromDom();

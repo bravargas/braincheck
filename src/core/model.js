@@ -12,6 +12,7 @@
  * @property {boolean} showDate
  * @property {boolean} showSignature
  * @property {boolean} showMicr
+ * @property {boolean} showWatermark
  */
 
 /**
@@ -42,6 +43,7 @@
  * @property {string} templateId
  * @property {string} watermark
  * @property {string} payor
+ * @property {string} payorAddress
  * @property {string} payee
  * @property {string} bankName
  * @property {string} bankRtn
@@ -98,7 +100,8 @@ export function createDefaultScenarioConfig() {
       showAmount: true,
       showDate: true,
       showSignature: true,
-      showMicr: true
+      showMicr: true,
+      showWatermark: true
     },
     manual: {
       payor: "",

@@ -17,7 +17,7 @@ This project is constrained by strict safety rules:
 - Uses synthetic names, synthetic institutions, and synthetic identifiers only
 - Does not generate real account numbers
 - Uses a synthetic MICR line
-- Applies strong visible watermarking on generated checks (SAMPLE on front, VOID on rear)
+- Applies strong visible SAMPLE watermarking on generated checks (front and rear)
 - Output is explicitly non-negotiable and unsuitable for real-world financial use
 
 ## 3. Technical Scope and Runtime
@@ -51,8 +51,6 @@ Phase 1 delivered a working MVP with the following capabilities:
 - Synthetic data loaded from local JSON files
 - Strong watermarking on every generated check
 - PNG export
-- JSON metadata export
-- Base64 output display
 - Visual effects controls:
   - blur
   - brightness
@@ -151,6 +149,7 @@ Draws front check composition:
 
 - template-driven visual background
 - SAMPLE watermark
+- payor name with synthetic payor address line
 - bank title, check number, date, payee, amount, words, memo, signature
 - conditional field display based on visibility toggles
 - optional MICR line rendering
@@ -159,7 +158,7 @@ Draws front check composition:
 Draws rear check composition:
 
 - rear panel styling and endorsement area
-- VOID watermark
+- SAMPLE watermark (same color and orientation style as front)
 - synthetic identifier and non-negotiable notice
 
 #### src/render/textLayout.js
@@ -189,17 +188,15 @@ Wires DOM controls to state updates and actions:
 - mode, seed, amount range, date range
 - manual fields
 - effects sliders
-- visibility checkboxes
+- visibility checkboxes (including watermark toggle)
 - preset application
 - generate and randomize button bindings
 
 #### src/ui/preview.js
 Handles:
 
-- tab switching behavior for primary controls near Generate (Front/Rear) and secondary settings controls (JSON/Base64/About)
+- tab switching behavior for primary controls near Generate (Front/Rear/Both) and About panel
 - canvas rendering refresh
-- JSON text output
-- base64 image output generation
 
 #### src/ui/app.js
 Application bootstrap:
@@ -207,7 +204,7 @@ Application bootstrap:
 - asynchronous loading of local JSON datasets
 - control initialization
 - generation and re-render flow
-- export button actions (PNG and JSON)
+- export button actions (PNG)
 - internal configuration for title-area legacy-version link (legacyVersionConfig)
 - post-font-load canvas refresh to ensure custom font rendering on first open
 
@@ -267,13 +264,25 @@ Preset effect and visibility combinations for quick scenario switching.
 - Left side: controls panel
 - Right side: live preview panel
 
-### 8.2 Tabs
+### 8.2 View Toggle and Tabs
 
+**View Toggle (Actions Section)**
+
+- Segmented 3-option control with explicit modes: **Both**, **Front**, and **Rear**
+- **Both** is first in the control and is the default on initial load
+- **Both** view shows front and rear previews stacked vertically for clearer comparison
+
+**Primary Tabs**
+
+- Both (default)
 - Front
 - Rear
-- JSON
-- Base64
-- About
+
+**Secondary Panel**
+
+- About opens as a floating modal dialog with backdrop
+- About can be closed with the close button, outside click, or Escape
+- Generate clears/closes secondary panels to return focus to check preview
 
 ### 8.3 Primary Flow
 
@@ -281,8 +290,7 @@ Preset effect and visibility combinations for quick scenario switching.
 2. User clicks Generate or Randomize Seed + Generate.
 3. App computes GeneratedCheckSample.
 4. Renderer updates front/rear canvas.
-5. JSON and Base64 outputs refresh.
-6. User exports PNG and JSON when needed.
+5. User exports PNG when needed.
 
 ## 9. Determinism and Reproducibility
 
@@ -335,7 +343,7 @@ The application has been optimized for camera-based OCR workflows:
 - **Consistent vertical alignment**: 80px top margins on all preview content for reliable framing
 - **Watermark opacity reduction**:
   - Front SAMPLE watermark: 0.08 opacity (subtle visual indicator without OCR interference)
-  - Rear VOID watermark: 0.06 opacity (minimal visual footprint)
+  - Rear SAMPLE watermark: 0.08 opacity (same visual treatment as front)
 - **Enhanced visibility contrast**:
   - SAMPLE VOID text: Solid dark color at 16px for clear document identifier
   - Check borders: Consistent 2px strokes for reliable edge detection in OCR

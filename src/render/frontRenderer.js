@@ -24,7 +24,7 @@ function drawWatermark(ctx, width, height, text) {
   ctx.save();
   ctx.translate(width / 2, height / 2);
   ctx.rotate((-20 * Math.PI) / 180);
-  ctx.font = "bold 84px 'Avenir Next', sans-serif";
+  ctx.font = "bold 42px 'Avenir Next', sans-serif";
   ctx.fillStyle = "rgba(162, 59, 42, 0.08)";
   ctx.textAlign = "center";
   ctx.fillText(text, 0, 0);
@@ -36,15 +36,17 @@ export function renderFront(ctx, sample) {
   const vis = sample.scenario.visibility;
 
   drawBackground(ctx, sample, width, height);
-  drawWatermark(ctx, width, height, sample.watermark);
+  if (vis.showWatermark) {
+    drawWatermark(ctx, width, height, sample.watermark);
+  }
 
   ctx.fillStyle = "#2a3945";
   ctx.font = "700 26px 'Avenir Next', sans-serif";
   ctx.fillText(sample.payor, 32, 56);
 
-  ctx.font = "16px 'Trebuchet MS', sans-serif";
-  ctx.fillStyle = "#2a3945";
-  ctx.fillText("***SAMPLE VOID***", 34, 78);
+  ctx.font = "14px 'Trebuchet MS', sans-serif";
+  ctx.fillStyle = "#3f4c57";
+  ctx.fillText(sample.payorAddress || "", 34, 78);
   ctx.font = "500 24px 'Trebuchet MS', sans-serif";
   ctx.fillStyle = "#2a3945";
   ctx.fillText(sample.checkNumber, width - 160, 64);

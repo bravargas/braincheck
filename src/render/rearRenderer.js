@@ -24,19 +24,21 @@ function drawRearBackground(ctx, sample, width, height) {
 }
 
 function drawWatermark(ctx, sample, width, height) {
-  const accent = sample.template.accent || "#2c4a5e";
   ctx.save();
   ctx.translate(width / 2, height / 2);
-  ctx.rotate((-20 * Math.PI) / 180);
-  ctx.font = "bold 88px 'Avenir Next', sans-serif";
+  // Rear rendering rotates the whole canvas 90deg, so use -110deg here
+  // to preserve the same final on-screen watermark angle as the front.
+  ctx.rotate((-110 * Math.PI) / 180);
+  ctx.font = "bold 42px 'Avenir Next', sans-serif";
   ctx.textAlign = "center";
-  ctx.fillStyle = hexToRgba(accent, 0.06);
-  ctx.fillText("VOID", 0, 0);
+  ctx.fillStyle = "rgba(162, 59, 42, 0.08)";
+  ctx.fillText(sample.watermark, 0, 0);
   ctx.restore();
 }
 
 export function renderRear(ctx, sample) {
   const { width, height } = ctx.canvas;
+  const vis = sample.scenario.visibility;
 
   ctx.save();
   ctx.translate(width / 2, height / 2);
@@ -44,7 +46,9 @@ export function renderRear(ctx, sample) {
   ctx.translate(-height / 2, -width / 2);
 
   drawRearBackground(ctx, sample, height, width);
-  drawWatermark(ctx, sample, height, width);
+  if (vis.showWatermark) {
+    drawWatermark(ctx, sample, height, width);
+  }
 
   ctx.strokeStyle = hexToRgba(sample.template.accent || "#2c4a5e", 0.55);
   ctx.lineWidth = 2;

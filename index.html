@@ -49,10 +49,11 @@
 
         <section class="control-group actions">
           <button id="generateBtn" type="button">Generate</button>
-          <button id="flipViewBtn" type="button" class="flip-toggle" title="Flip between front and rear">
-            <span class="flip-icon" aria-hidden="true"></span>
-            <span>Flip View</span>
-          </button>
+          <div class="view-mode-switch" role="group" aria-label="Preview view mode">
+            <button id="viewBothBtn" type="button" class="view-mode-btn" data-view-mode="both">Both</button>
+            <button id="viewFrontBtn" type="button" class="view-mode-btn" data-view-mode="front">Front</button>
+            <button id="viewRearBtn" type="button" class="view-mode-btn" data-view-mode="rear">Rear</button>
+          </div>
           <button id="exportPngBtn" type="button" class="ghost">Export PNG</button>
         </section>
 
@@ -94,14 +95,13 @@
             <label><input id="showDate" type="checkbox" checked /> Date</label>
             <label><input id="showSignature" type="checkbox" checked /> Signature</label>
             <label><input id="showMicr" type="checkbox" checked /> MICR-like line</label>
+            <label><input id="showWatermark" type="checkbox" checked /> Watermark</label>
           </div>
         </section>
 
         <section class="control-group utility-tabs">
-          <h2>Extra Views</h2>
+          <h2>About</h2>
           <div class="utility-tab-buttons">
-            <button type="button" data-tab="json" class="tab-secondary">JSON</button>
-            <button type="button" data-tab="base64" class="tab-secondary">Base64</button>
             <button type="button" data-tab="about" class="tab-secondary">About</button>
           </div>
         </section>
@@ -114,14 +114,20 @@
         <section class="tab-body" data-pane="rear">
           <canvas id="rearCanvas" width="960" height="420"></canvas>
         </section>
-        <section class="tab-body" data-pane="json">
-          <textarea id="jsonOutput" readonly></textarea>
+        <section class="tab-body" id="bothViewsContainer">
+          <div class="both-views-wrapper">
+            <div class="both-views-item">
+              <canvas id="frontCanvasBoth" width="960" height="420"></canvas>
+            </div>
+            <div class="both-views-item">
+              <canvas id="rearCanvasBoth" width="960" height="420"></canvas>
+            </div>
+          </div>
         </section>
-        <section class="tab-body" data-pane="base64">
-          <textarea id="base64Output" readonly></textarea>
-        </section>
-        <section class="tab-body about" data-pane="about">
-          <h2>Safety and Purpose</h2>
+        <div id="aboutBackdrop" class="about-backdrop" aria-hidden="true"></div>
+        <section class="tab-body about about-modal" data-pane="about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+          <button id="closeAboutBtn" type="button" class="about-close" aria-label="Close About">×</button>
+          <h2 id="aboutTitle">Safety and Purpose</h2>
           <p>
             This local-first tool generates check-like images for visual QA,
             OCR robustness testing, and synthetic dataset generation.

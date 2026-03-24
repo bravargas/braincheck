@@ -64,6 +64,7 @@ export function wireControls(onGenerate) {
   const showDate = document.getElementById("showDate");
   const showSignature = document.getElementById("showSignature");
   const showMicr = document.getElementById("showMicr");
+  const showWatermark = document.getElementById("showWatermark");
 
   const generateBtn = document.getElementById("generateBtn");
 
@@ -84,7 +85,8 @@ export function wireControls(onGenerate) {
     showAmount,
     showDate,
     showSignature,
-    showMicr
+    showMicr,
+    showWatermark
   ];
 
   fields.forEach((el) => {
@@ -129,7 +131,8 @@ export function wireControls(onGenerate) {
         showAmount: showAmount.checked,
         showDate: showDate.checked,
         showSignature: showSignature.checked,
-        showMicr: showMicr.checked
+        showMicr: showMicr.checked,
+        showWatermark: showWatermark.checked
       },
       manual: {
         payor: manualPayor.value.trim(),
@@ -155,6 +158,7 @@ export function wireControls(onGenerate) {
     showDate.checked = cfg.visibility.showDate;
     showSignature.checked = cfg.visibility.showSignature;
     showMicr.checked = cfg.visibility.showMicr;
+    showWatermark.checked = cfg.visibility.showWatermark ?? true;
     manualPayor.value = cfg.manual.payor;
     manualPayee.value = cfg.manual.payee;
     manualBank.value = cfg.manual.bank;

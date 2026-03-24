@@ -58,6 +58,35 @@ function generateCheckIdentifier(random) {
   return `${random.int(10000, 99999)}`;
 }
 
+function generateSyntheticPayorAddress(random, country, city, stateLine) {
+  const streetNames = [
+    "Oak",
+    "Maple",
+    "Cedar",
+    "Pine",
+    "Willow",
+    "River",
+    "Sunset",
+    "Highland",
+    "Meadow",
+    "Lakeview"
+  ];
+  const streetTypes = ["St", "Ave", "Blvd", "Rd", "Ln", "Dr", "Way", "Ct"];
+  const streetNumber = random.int(100, 9999);
+  const street = `${streetNumber} ${random.pick(streetNames)} ${random.pick(streetTypes)}`;
+
+  if (country === "ca") {
+    const parts = String(stateLine || "ON M5J 2J5").trim().split(/\s+/);
+    const province = parts[0] || "ON";
+    const postal = parts.slice(1).join(" ") || "M5J 2J5";
+    return `${street}, ${city || "TORONTO"}, ${province} ${postal}`;
+  }
+
+  const state = String(stateLine || "MO").trim().slice(0, 2).toUpperCase() || "MO";
+  const zip = String(random.int(10000, 99999));
+  return `${street}, ${city || "OZARK"}, ${state} ${zip}`;
+}
+
 function chooseTemplate(templates, random) {
   if (!Array.isArray(templates) || templates.length === 0) {
     return {
@@ -129,12 +158,14 @@ export function generateCheckSample(config, data) {
   const micrLine = country === "ca"
     ? generateCanadianMicrLine(canadianTransit, accountNumber, checkSequence)
     : generateMicrLine(randomBank, accountNumber, checkSequence);
+  const payorAddress = generateSyntheticPayorAddress(random, country, bankCity, bankState);
 
   return {
     id: `${Date.now()}-${random.int(100, 999)}`,
     templateId: template.id,
-    watermark: "SAMPLE",
+    watermark: "*** SAMPLE VOID***",
     payor,
+    payorAddress,
     payee,
     bankName,
     bankRtn,

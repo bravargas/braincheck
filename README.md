@@ -20,7 +20,7 @@ This project is intentionally designed to be unusable for real financial activit
 - Uses synthetic-only bank names and identifiers
 - Does not generate real routing/account numbers
 - Uses a clearly synthetic MICR-like line marked as NOT-REAL
-- Applies strong visible watermarks (SAMPLE/VOID) on every output
+- Applies strong visible SAMPLE watermarking on every output side
 
 ## How to Run Locally
 
