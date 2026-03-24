@@ -4,6 +4,18 @@ All notable changes to Synthetic Check Image Generator are documented in this fi
 
 The format is inspired by Keep a Changelog and uses semantic versioning principles for future releases.
 
+## [Unreleased]
+
+### Fixed - IIS Deployment Font Loading
+
+- Fixed font 404 errors when the app is hosted under an IIS virtual directory (for example /RDCImageGenerator).
+- Updated font preload links in index.html to use relative paths (./src/assets/fonts/...) instead of root-absolute paths.
+- Updated @font-face source URLs in styles.css to use relative paths so assets resolve under subpaths.
+- Added web.config staticContent MIME mappings for:
+  - .ttf -> font/ttf
+  - .woff -> font/woff
+  - .woff2 -> font/woff2
+
 ## [0.1.0] - 2026-03-23
 
 ### Added - Project Foundation

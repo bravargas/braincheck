@@ -28,6 +28,18 @@ This project is constrained by strict safety rules:
 - Rendering: HTML5 Canvas for front and rear images
 - Dependencies: none (vanilla implementation)
 
+### 3.1 IIS Hosting Notes
+
+When hosting under IIS, especially in a virtual directory such as /RDCImageGenerator, static asset paths must be subpath-safe:
+
+- Use relative font URLs in HTML and CSS (./src/assets/fonts/...) instead of root-absolute URLs (/src/assets/fonts/...).
+- Ensure IIS serves font files with valid MIME types via web.config staticContent mappings:
+  - .ttf -> font/ttf
+  - .woff -> font/woff
+  - .woff2 -> font/woff2
+
+If fonts return 404 in browser Network tools, confirm the request URL includes the application subpath (for example /RDCImageGenerator/src/assets/fonts/Signerica_Medium.ttf).
+
 ## 4. Phase 1 Deliverables (What Was Built)
 
 Phase 1 delivered a working MVP with the following capabilities:

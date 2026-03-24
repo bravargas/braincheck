@@ -30,16 +30,16 @@
 @font-face {
   font-family: "Micr";
   src:
-    url("/src/assets/fonts/micrenc.ttf") format("truetype"),
-    url("/src/assets/fonts/micr.woff2") format("woff2"),
-    url("/src/assets/fonts/micr.woff") format("woff"),
-    url("/src/assets/fonts/micr.ttf") format("truetype");
+    url("./src/assets/fonts/micrenc.ttf") format("truetype"),
+    url("./src/assets/fonts/micr.woff2") format("woff2"),
+    url("./src/assets/fonts/micr.woff") format("woff"),
+    url("./src/assets/fonts/micr.ttf") format("truetype");
   font-display: fallback;
 }
 
 @font-face {
   font-family: "Signerica Medium";
-  src: url("/src/assets/fonts/Signerica_Medium.ttf") format("truetype");
+  src: url("./src/assets/fonts/Signerica_Medium.ttf") format("truetype");
   font-display: fallback;
 }
 
