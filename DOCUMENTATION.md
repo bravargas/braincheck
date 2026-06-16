@@ -8,15 +8,16 @@ BrainCheque is a local-first, client-side web application designed to generate c
 - OCR stress testing
 - Synthetic dataset generation
 
-The application intentionally avoids any real banking-valid artifacts and applies explicit visual safety markers to prevent misuse.
+The application supports QA/OCR validation workflows while applying explicit visual safety markers to prevent misuse.
 
 ## 2. Safety-First Product Boundaries
 
 This project is constrained by strict safety rules:
 
-- Uses synthetic names, synthetic institutions, and synthetic identifiers only
+- Uses synthetic names and generated test identifiers
+- Uses controlled local bank data for QA/OCR validation scenarios
+- Uses bank RTNs as 9-digit MICR transit values so ABA checksum validation can be tested
 - Does not generate real account numbers
-- Uses a synthetic MICR line
 - Applies strong visible SAMPLE watermarking on generated checks (front and rear)
 - Output is explicitly non-negotiable and unsuitable for real-world financial use
 
@@ -136,7 +137,7 @@ Responsibilities:
 - support for manual overrides when mode is manual
 - amount/date generation within configured range
 - synthetic identifier generation
-- synthetic MICR string generation
+- MICR string generation with ABA-valid 9-digit transit values from the bank dataset
 - scenario snapshot embedding for traceability
 
 ## 6.2 Rendering Layer
@@ -228,7 +229,21 @@ Client-side file downloads for PNG and text-based metadata.
 ## 7. Data Files and Their Role
 
 ### src/data/banks.us.json
-Synthetic US institutions used for US check generation.
+Controlled US bank records used for US check generation and ABA/MICR validation testing.
+
+Expected fields per entry:
+
+- rtn (9-digit routing transit number)
+- shortName
+- longName
+- city
+- state
+- v1, v2, v3 (optional metadata)
+
+Generator mapping notes:
+
+- Bank display name uses shortName, then longName as fallback.
+- The US MICR transit field uses the 9-digit rtn value and preserves leading zeroes.
 
 ### src/data/banks.ca.json
 Synthetic Canadian institutions used for Canadian check generation.

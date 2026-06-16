@@ -6,6 +6,12 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
 
 ## [Unreleased]
 
+### Changed - MICR QA Validation
+
+- Updated US MICR generation to preserve the full 9-digit bank RTN from the local bank dataset, including leading zeroes.
+- Restored ABA checksum-valid transit values for QA/OCR validation workflows.
+- Renamed the generator helper from buildSyntheticTransitFromRtn to buildTransitFromRtn to reflect the new behavior.
+
 ### Fixed - IIS Deployment Font Loading
 
 - Fixed font 404 errors when the app is hosted under an IIS virtual directory (for example /RDCImageGenerator).

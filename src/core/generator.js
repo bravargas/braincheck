@@ -21,11 +21,8 @@ function generateCanadianAccountNumber(random) {
   return `${pad(random.int(10000, 99999), 5)}D${pad(random.int(1000, 9999), 4)}`;
 }
 
-function buildSyntheticTransitFromRtn(sourceRtn) {
-  const digits = String(sourceRtn || "").replace(/\D/g, "").padStart(9, "0").slice(0, 9);
-
-  // Keep linkage to source data while making this value intentionally non-usable.
-  return `${digits.slice(1, 8)}`;
+function buildTransitFromRtn(sourceRtn) {
+  return String(sourceRtn || "").replace(/\D/g, "").padStart(9, "0").slice(0, 9);
 }
 
 function generateMicrLine(bank, accountNumber, checkSequence) {
@@ -35,11 +32,11 @@ function generateMicrLine(bank, accountNumber, checkSequence) {
   const DASH = "D";
   const SPACE = " ";
 
-  const RTN = buildSyntheticTransitFromRtn(bank?.rtn);
+  const RTN = buildTransitFromRtn(bank?.rtn);
   return (
     `${TRANSIT}${RTN}${TRANSIT}${SPACE}` +
-    `${accountNumber}${ON_US}${SPACE}` +
-    `${checkSequence}`
+    `${accountNumber}${SPACE}` +
+    `${ON_US}${checkSequence}${SPACE}`
   );
 }
 
