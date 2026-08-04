@@ -60,13 +60,14 @@ export function renderRear(ctx, sample) {
   ctx.font = "600 18px 'Trebuchet MS', sans-serif";
   ctx.fillText("Endorse Here", 44, 58);
 
-  // Endorso payee en fuente manuscrita azul
-  const signatureFontFamily =
-    getComputedStyle(document.documentElement).getPropertyValue("--signature-font-family").trim() ||
-    "'Brush Script MT', cursive";
-  ctx.fillStyle = "#0047AB";
-  ctx.font = `24px ${signatureFontFamily}`;
-  ctx.fillText(sample.payee, 50, 96);
+  if (vis.showEndorsementSignature !== false) {
+    const signatureFontFamily =
+      getComputedStyle(document.documentElement).getPropertyValue("--signature-font-family").trim() ||
+      "'Brush Script MT', cursive";
+    ctx.fillStyle = "#0047AB";
+    ctx.font = `24px ${signatureFontFamily}`;
+    ctx.fillText(sample.payee, 50, 96);
+  }
 
   ctx.fillStyle = "#2a3945";
   ctx.font = "14px 'Trebuchet MS', sans-serif";

@@ -63,6 +63,7 @@ export function wireControls(onGenerate) {
   const showAmount = document.getElementById("showAmount");
   const showDate = document.getElementById("showDate");
   const showSignature = document.getElementById("showSignature");
+  const showEndorsementSignature = document.getElementById("showEndorsementSignature");
   const showMicr = document.getElementById("showMicr");
   const showWatermark = document.getElementById("showWatermark");
 
@@ -85,6 +86,7 @@ export function wireControls(onGenerate) {
     showAmount,
     showDate,
     showSignature,
+    showEndorsementSignature,
     showMicr,
     showWatermark
   ];
@@ -131,6 +133,7 @@ export function wireControls(onGenerate) {
         showAmount: showAmount.checked,
         showDate: showDate.checked,
         showSignature: showSignature.checked,
+        showEndorsementSignature: showEndorsementSignature.checked,
         showMicr: showMicr.checked,
         showWatermark: showWatermark.checked
       },
@@ -157,6 +160,7 @@ export function wireControls(onGenerate) {
     showAmount.checked = cfg.visibility.showAmount;
     showDate.checked = cfg.visibility.showDate;
     showSignature.checked = cfg.visibility.showSignature;
+    showEndorsementSignature.checked = cfg.visibility.showEndorsementSignature ?? true;
     showMicr.checked = cfg.visibility.showMicr;
     showWatermark.checked = cfg.visibility.showWatermark ?? true;
     manualPayor.value = cfg.manual.payor;

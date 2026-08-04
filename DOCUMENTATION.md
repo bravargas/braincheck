@@ -60,7 +60,8 @@ Phase 1 delivered a working MVP with the following capabilities:
   - payee
   - amount
   - date
-  - signature
+  - front signature
+  - endorsement signature
   - MICR line
 - Scenario-based configuration model
 - Modular architecture separating generation, rendering, state, and UI wiring
@@ -159,6 +160,7 @@ Draws front check composition:
 Draws rear check composition:
 
 - rear panel styling and endorsement area
+- optional payee endorsement signature controlled independently from the front signature
 - SAMPLE watermark (same color and orientation style as front)
 - synthetic identifier and non-negotiable notice
 
@@ -189,7 +191,7 @@ Wires DOM controls to state updates and actions:
 - mode, seed, amount range, date range
 - manual fields
 - effects sliders
-- visibility checkboxes (including watermark toggle)
+- visibility checkboxes for payee, amount, date, front signature, endorsement signature, MICR line, and watermark
 - preset application
 - generate and randomize button bindings
 

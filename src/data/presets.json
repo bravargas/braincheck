@@ -12,6 +12,7 @@
       "showAmount": true,
       "showDate": true,
       "showSignature": true,
+      "showEndorsementSignature": true,
       "showMicr": true
     },
     "amountRange": {
@@ -32,6 +33,7 @@
       "showAmount": true,
       "showDate": true,
       "showSignature": false,
+      "showEndorsementSignature": true,
       "showMicr": true
     }
   },
@@ -48,6 +50,7 @@
       "showAmount": false,
       "showDate": true,
       "showSignature": false,
+      "showEndorsementSignature": true,
       "showMicr": false
     }
   }

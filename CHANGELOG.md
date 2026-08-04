@@ -6,6 +6,14 @@ The format is inspired by Keep a Changelog and uses semantic versioning principl
 
 ## [Unreleased]
 
+## [2.0.2] - 2026-08-04
+
+### Added - Endorsement Signature Visibility
+
+- Added an independent Endorsement Signature checkbox to the Visibility controls.
+- Added showEndorsementSignature to the scenario visibility configuration and presets.
+- Updated rear rendering so the payee endorsement signature can be omitted without affecting the front signature or other rear fields.
+
 ### Changed - MICR QA Validation
 
 - Updated US MICR generation to preserve the full 9-digit bank RTN from the local bank dataset, including leading zeroes.

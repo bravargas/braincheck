@@ -11,6 +11,7 @@
  * @property {boolean} showAmount
  * @property {boolean} showDate
  * @property {boolean} showSignature
+ * @property {boolean} showEndorsementSignature
  * @property {boolean} showMicr
  * @property {boolean} showWatermark
  */
@@ -100,6 +101,7 @@ export function createDefaultScenarioConfig() {
       showAmount: true,
       showDate: true,
       showSignature: true,
+      showEndorsementSignature: true,
       showMicr: true,
       showWatermark: true
     },

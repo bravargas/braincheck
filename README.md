@@ -68,7 +68,7 @@ Key design choices:
 - JSON metadata export
 - Base64 output panel
 - Effects: blur, brightness, slight rotation
-- Field visibility toggles for payee, amount, date, signature, MICR-like line
+- Field visibility toggles for payee, amount, date, front signature, endorsement signature, and MICR-like line
 
 ## Extension Ideas
 
